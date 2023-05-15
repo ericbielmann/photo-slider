@@ -15,7 +15,7 @@ function App() {
   //   `${process.env.PUBLIC_URL}/images/tarea-modo-manual-caro-3.JPG`,
   //   `${process.env.PUBLIC_URL}/images/tarea-modo-manual-caro-4.JPG`,
   // ];
-
+// test
   const images = useMemo(() => {
     return [
       `${process.env.PUBLIC_URL}/images/tarea-modo-manual-eric-1.JPG`,
