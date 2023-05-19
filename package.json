@@ -9,6 +9,7 @@
     "blueimp-load-image": "^5.16.0",
     "exif-js": "^2.3.0",
     "exifreader": "^4.12.0",
+    "gh-pages": "^5.0.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-scripts": "5.0.1",
