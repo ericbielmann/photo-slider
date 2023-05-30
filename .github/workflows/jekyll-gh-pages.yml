@@ -47,5 +47,8 @@ jobs:
     needs: build
     steps:
       - name: Deploy to GitHub Pages
+        with:
+          deploy_key: ${{ secrets.ACTIONS_DEPLOY_KEY }}
+          publish_dir: ./build
         id: deployment
         uses: actions/deploy-pages@v2
