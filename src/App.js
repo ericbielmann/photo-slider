@@ -6,6 +6,7 @@ import React, {
   useCallback,
 } from 'react';
 import EXIF from 'exif-js';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
 
 function App() {
   // const images = [
@@ -16,7 +17,7 @@ function App() {
   //   `${process.env.PUBLIC_URL}/images/tarea-modo-manual-caro-4.JPG`,
   //   `${process.env.PUBLIC_URL}/images/tarea-modo-manual-caro-4.JPG`,
   // ];
-// test
+  // test
   const images = useMemo(() => {
     return [
       `${process.env.PUBLIC_URL}/images/tarea-modo-manual-eric-1.JPG`,
@@ -30,39 +31,36 @@ function App() {
   const [iso, setISO] = useState();
   const [exposureTime, setExposureTime] = useState();
   const [fNumber, setFNumber] = useState();
-  
+
   const [allExif, setAllExif] = useState([]);
 
   const [selctedImage, setSelectedImage] = useState(images[0]);
   const sliderRef = useRef(null);
   const selectedImgRef = React.useRef(null);
 
-  function deepCompareEquals(a, b){
-    if(!a.length && !b.length) {
+  function deepCompareEquals(a, b) {
+    if (!a.length && !b.length) {
       return false;
     }
-    return JSON.stringify(a) === JSON.stringify(b)
+    return JSON.stringify(a) === JSON.stringify(b);
   }
 
   function useDeepCompareMemoize(value) {
-    const ref = useRef() 
+    const ref = useRef();
     // it can be done by using useMemo as well
     // but useRef is rather cleaner and easier
-  
+
     if (!deepCompareEquals(value, ref.current)) {
-      ref.current = value
+      ref.current = value;
     }
-  
-    return ref.current
+
+    return ref.current;
   }
-  
+
   function useDeepCompareEffect(callback, dependencies) {
-    useEffect(
-      callback,
-      dependencies.map(useDeepCompareMemoize)
-    )
+    useEffect(callback, dependencies.map(useDeepCompareMemoize));
   }
-  
+
   const getExifData = useCallback(() => {
     // const test2 = `${process.env.PUBLIC_URL}/images/tarea-modo-manual-caro-1.JPG`;
     // const file = new File([test2], 'tarea-modo-manual-caro-1.JPG');
@@ -72,7 +70,7 @@ function App() {
     const slider = document
       .getElementById('slider')
       .getElementsByTagName('img');
-      let exifList = [];
+    let exifList = [];
 
     let index = 0;
     for (const sliderImg of slider) {
@@ -95,7 +93,7 @@ function App() {
       });
       index++;
     }
-    if(!deepCompareEquals(allExif, exifList)) {
+    if (!deepCompareEquals(allExif, exifList)) {
       setAllExif(exifList);
     }
   });
@@ -114,11 +112,15 @@ function App() {
 
   const onSelectImage = (img) => {
     const indexImage = images.findIndex((x) => x.includes(img));
-    const selectedExif = allExif[indexImage]
+    const selectedExif = allExif[indexImage];
 
     setISO(selectedExif?.ISOSpeedRatings);
-    setExposureTime(selectedExif?.ExposureTime?.numerator + '/' + selectedExif?.ExposureTime?.denominator);
-    setFNumber(selectedExif?.FNumber.toString())
+    setExposureTime(
+      selectedExif?.ExposureTime?.numerator +
+        '/' +
+        selectedExif?.ExposureTime?.denominator
+    );
+    setFNumber(selectedExif?.FNumber.toString());
 
     setSelectedImage(img);
   };
@@ -145,14 +147,23 @@ function App() {
 
             <div id="slider" ref={sliderRef}>
               {images.map((img, index) => (
-                <img
+                // <img
+                //   key={index}
+                //   className={`thumbnail ${
+                //     selctedImage === img ? 'active' : ''
+                //   }`}
+                //   onClick={(e) => onSelectImage(img)}
+                //   src={img}
+                //   alt="img"
+                // />
+                <LazyLoadImage
                   key={index}
                   className={`thumbnail ${
                     selctedImage === img ? 'active' : ''
                   }`}
-                  onClick={(e) => onSelectImage(img)}
                   src={img}
                   alt="img"
+                  onClick={(e) => onSelectImage(img)}
                 />
               ))}
             </div>
