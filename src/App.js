@@ -22,9 +22,9 @@ function App() {
     return [
       `${process.env.PUBLIC_URL}/images/tarea-modo-manual-eric-1.JPG`,
       `${process.env.PUBLIC_URL}/images/tarea-modo-manual-caro-1.JPG`,
-      // `${process.env.PUBLIC_URL}/images/tarea-modo-manual-caro-2.JPG`,
-      // `${process.env.PUBLIC_URL}/images/tarea-modo-manual-caro-3.JPG`,
-      // `${process.env.PUBLIC_URL}/images/tarea-modo-manual-caro-4.JPG`,
+      `${process.env.PUBLIC_URL}/images/tarea-modo-manual-caro-2.JPG`,
+      `${process.env.PUBLIC_URL}/images/tarea-modo-manual-caro-3.JPG`,
+      `${process.env.PUBLIC_URL}/images/tarea-modo-manual-caro-4.JPG`,
     ];
   }, []);
 
